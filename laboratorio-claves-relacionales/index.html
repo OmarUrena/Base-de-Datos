@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Laboratorio interactivo para aprender claves primarias y foráneas en bases de datos relacionales.">
+  <title>Clave a clave · Laboratorio relacional</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="Volver al inicio">
+      <span class="brand-mark" aria-hidden="true">⌘</span>
+      <span>CLAVE A CLAVE</span>
+    </a>
+    <nav class="main-nav" aria-label="Navegación principal">
+      <a class="nav-link active" href="#descubre">Descubre</a>
+      <a class="nav-link" href="#conecta">Conecta</a>
+      <a class="nav-link" href="#practica">Practica</a>
+    </nav>
+    <button class="sound-toggle" id="soundToggle" type="button" aria-pressed="false" title="Activar sonidos de respuesta">
+      <span aria-hidden="true">♪</span><span class="sound-label">Sonido</span>
+    </button>
+  </header>
+
+  <main id="contenido">
+    <section class="hero" id="inicio">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> BASES DE DATOS · NIVEL INICIAL</p>
+        <h1>Dos claves.<br><em>Una gran conexión.</em></h1>
+        <p class="hero-lead">Aprende cómo una base de datos identifica cada registro y conecta sus tablas. Sin memorizar: viendo, tocando y probando.</p>
+        <a class="primary-button" href="#descubre">Comenzar el recorrido <span aria-hidden="true">↓</span></a>
+        <p class="duration">⏱ 10 minutos · 3 estaciones</p>
+      </div>
+
+      <div class="hero-demo" aria-label="Vista previa de una relación entre las tablas Clientes y Pedidos">
+        <div class="floating-note note-one">Identifica <b>una fila</b></div>
+        <div class="floating-note note-two">Conecta <b>dos tablas</b></div>
+        <div class="mini-table mini-customers">
+          <div class="mini-table-title"><span class="table-icon">▦</span> CLIENTES</div>
+          <div class="mini-row mini-head"><span>cliente_id</span><span>nombre</span></div>
+          <div class="mini-row"><span class="mini-pk">101 <small>PK</small></span><span>Ana</span></div>
+          <div class="mini-row"><span class="mini-pk">102 <small>PK</small></span><span>Leo</span></div>
+        </div>
+        <svg class="hero-connector" viewBox="0 0 210 120" role="img" aria-label="La clave 101 conecta un cliente con su pedido">
+          <path d="M16 18 C106 18 103 98 194 98" pathLength="1" />
+          <circle cx="16" cy="18" r="5" />
+          <circle cx="194" cy="98" r="5" />
+        </svg>
+        <div class="mini-table mini-orders">
+          <div class="mini-table-title"><span class="table-icon">▦</span> PEDIDOS</div>
+          <div class="mini-row mini-head"><span>pedido_id</span><span>cliente_id</span></div>
+          <div class="mini-row"><span>5001</span><span class="mini-fk">101 <small>FK</small></span></div>
+          <div class="mini-row"><span>5002</span><span class="mini-fk">101 <small>FK</small></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="concept-section section-shell" id="descubre" data-nav="descubre">
+      <div class="section-heading centered">
+        <p class="section-number">01 — DESCUBRE</p>
+        <h2>Cada tabla necesita una identidad</h2>
+        <p>Piensa en una tabla como una lista de personas. ¿Cómo distinguimos a dos personas que se llaman igual?</p>
+      </div>
+
+      <div class="key-comparison">
+        <article class="key-card primary-card">
+          <div class="key-card-top">
+            <span class="key-symbol" aria-hidden="true">◆</span>
+            <div>
+              <p class="micro-label">LA IDENTIDAD</p>
+              <h3>Clave primaria <span>PK</span></h3>
+            </div>
+          </div>
+          <p>Es la columna que identifica de manera <strong>única</strong> cada fila de una tabla.</p>
+          <ul class="rule-list">
+            <li><span>✓</span> No se repite</li>
+            <li><span>✓</span> Nunca está vacía</li>
+            <li><span>✓</span> Se recomienda una por tabla</li>
+          </ul>
+          <div class="analogy"><span aria-hidden="true">☝</span><p>Como tu número de cédula: solo te pertenece a ti.</p></div>
+        </article>
+
+        <div class="versus" aria-hidden="true"><span>VS</span></div>
+
+        <article class="key-card foreign-card">
+          <div class="key-card-top">
+            <span class="key-symbol" aria-hidden="true">↗</span>
+            <div>
+              <p class="micro-label">EL ENLACE</p>
+              <h3>Clave foránea <span>FK</span></h3>
+            </div>
+          </div>
+          <p>Es una columna que <strong>apunta a la clave primaria</strong> de otra tabla.</p>
+          <ul class="rule-list">
+            <li><span>✓</span> Puede repetirse</li>
+            <li><span>✓</span> Crea una relación</li>
+            <li><span>✓</span> Evita datos huérfanos</li>
+          </ul>
+          <div class="analogy"><span aria-hidden="true">☝</span><p>Como escribir tu cédula en una compra para saber que es tuya.</p></div>
+        </article>
+      </div>
+
+      <div class="remember-strip">
+        <span class="bulb" aria-hidden="true">✦</span>
+        <p><b>Regla para recordar</b>La primaria dice <q>¿quién soy?</q>. La foránea dice <q>¿con quién me relaciono?</q>.</p>
+      </div>
+    </section>
+
+    <section class="connection-section" id="conecta" data-nav="conecta">
+      <div class="section-shell">
+        <div class="section-heading split-heading">
+          <div>
+            <p class="section-number">02 — CONECTA</p>
+            <h2>Mira la relación en acción</h2>
+          </div>
+          <p>Selecciona un cliente y observa cómo la clave foránea encuentra todos sus pedidos.</p>
+        </div>
+
+        <div class="relation-lab">
+          <article class="data-panel" aria-labelledby="customersTitle">
+            <div class="data-panel-head">
+              <div><span class="table-icon">▦</span><div><h3 id="customersTitle">Clientes</h3><p>TABLA PRINCIPAL</p></div></div>
+              <span class="record-count">3 registros</span>
+            </div>
+            <div class="data-table" role="table" aria-label="Tabla Clientes">
+              <div class="data-row data-header" role="row"><span role="columnheader">cliente_id <b>PK</b></span><span role="columnheader">nombre</span><span role="columnheader">ciudad</span></div>
+              <button class="data-row customer-row selected" type="button" role="row" data-customer="101" aria-pressed="true"><span role="cell"><i>◆</i>101</span><span role="cell">Ana</span><span role="cell">Mérida</span></button>
+              <button class="data-row customer-row" type="button" role="row" data-customer="102" aria-pressed="false"><span role="cell"><i>◆</i>102</span><span role="cell">Leo</span><span role="cell">Caracas</span></button>
+              <button class="data-row customer-row" type="button" role="row" data-customer="103" aria-pressed="false"><span role="cell"><i>◆</i>103</span><span role="cell">Sofía</span><span role="cell">Valencia</span></button>
+            </div>
+            <p class="panel-caption"><span>◆</span> Cada cliente tiene un ID irrepetible.</p>
+          </article>
+
+          <div class="relationship-center" aria-live="polite">
+            <div class="cardinality-badge"><b>1</b><span></span><strong>∞</strong></div>
+            <div class="animated-link"><span></span><i>→</i></div>
+            <p><b>UNO A MUCHOS</b>Un cliente puede tener varios pedidos.</p>
+          </div>
+
+          <article class="data-panel" aria-labelledby="ordersTitle">
+            <div class="data-panel-head">
+              <div><span class="table-icon">▦</span><div><h3 id="ordersTitle">Pedidos</h3><p>TABLA RELACIONADA</p></div></div>
+              <span class="record-count">5 registros</span>
+            </div>
+            <div class="data-table orders-table" role="table" aria-label="Tabla Pedidos">
+              <div class="data-row data-header" role="row"><span role="columnheader">pedido_id <b>PK</b></span><span role="columnheader">cliente_id <em>FK</em></span><span role="columnheader">total</span></div>
+              <div class="data-row order-row match" role="row" data-owner="101"><span role="cell">5001</span><span role="cell"><i>↗</i>101</span><span role="cell">$24</span></div>
+              <div class="data-row order-row" role="row" data-owner="102"><span role="cell">5002</span><span role="cell"><i>↗</i>102</span><span role="cell">$41</span></div>
+              <div class="data-row order-row match" role="row" data-owner="101"><span role="cell">5003</span><span role="cell"><i>↗</i>101</span><span role="cell">$18</span></div>
+              <div class="data-row order-row" role="row" data-owner="103"><span role="cell">5004</span><span role="cell"><i>↗</i>103</span><span role="cell">$63</span></div>
+              <div class="data-row order-row" role="row" data-owner="102"><span role="cell">5005</span><span role="cell"><i>↗</i>102</span><span role="cell">$12</span></div>
+            </div>
+            <p class="panel-caption foreign-caption"><span>↗</span> El ID se repite porque un cliente puede comprar varias veces.</p>
+          </article>
+        </div>
+
+        <div class="selection-message" id="selectionMessage" aria-live="polite"><span>●</span> Ana (cliente 101) está conectada con <b>2 pedidos</b>.</div>
+      </div>
+    </section>
+
+    <section class="practice-section section-shell" id="practica" data-nav="practica">
+      <div class="section-heading centered">
+        <p class="section-number">03 — PRACTICA</p>
+        <h2>Ahora te toca conectar</h2>
+        <p>Una biblioteca necesita organizar sus préstamos. Completa la relación.</p>
+      </div>
+
+      <div class="challenge-card" id="challengeCard">
+        <div class="challenge-progress">
+          <div><span>PASO</span><b id="stepNumber">1 de 3</b></div>
+          <div class="progress-track" aria-label="Progreso del reto"><span id="progressFill"></span></div>
+          <button class="reset-button" id="resetChallenge" type="button">↻ Reiniciar</button>
+        </div>
+
+        <div class="challenge-stage" id="challengeStage">
+          <div class="challenge-copy">
+            <span class="challenge-tag">MISIÓN 01</span>
+            <h3>Elige la clave primaria</h3>
+            <p>¿Qué columna identifica de forma única a cada libro?</p>
+          </div>
+          <div class="choice-grid" id="choiceGrid" role="group" aria-label="Opciones de respuesta">
+            <button class="choice" type="button" data-answer="titulo"><span>título</span><small>Cien años de soledad</small></button>
+            <button class="choice" type="button" data-answer="libro_id"><span>libro_id</span><small>LIB-042</small></button>
+            <button class="choice" type="button" data-answer="autor"><span>autor</span><small>G. García Márquez</small></button>
+          </div>
+          <div class="feedback" id="challengeFeedback" aria-live="assertive"></div>
+        </div>
+      </div>
+
+      <div class="concept-check">
+        <div class="check-intro"><span>?</span><div><h3>Chequeo relámpago</h3><p>Dos preguntas para fijar la idea.</p></div></div>
+        <div class="quick-question" data-correct="b">
+          <p>1. ¿Puede repetirse una clave primaria?</p>
+          <div><button type="button" data-option="a">Sí</button><button type="button" data-option="b">No</button></div>
+          <small aria-live="polite"></small>
+        </div>
+        <div class="quick-question" data-correct="a">
+          <p>2. ¿La clave foránea debe apuntar a un registro existente?</p>
+          <div><button type="button" data-option="a">Sí</button><button type="button" data-option="b">No</button></div>
+          <small aria-live="polite"></small>
+        </div>
+      </div>
+    </section>
+
+    <section class="summary-section">
+      <div class="section-shell summary-content">
+        <div>
+          <p class="section-number">EN 20 SEGUNDOS</p>
+          <h2>Lo esencial, clave a clave</h2>
+        </div>
+        <div class="summary-grid">
+          <div><span>01</span><p><b>PK = identidad</b>Un valor único por fila.</p></div>
+          <div><span>02</span><p><b>FK = conexión</b>Referencia una PK de otra tabla.</p></div>
+          <div><span>03</span><p><b>Juntas = relación</b>Permiten unir datos sin repetirlos.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><b>CLAVE A CLAVE</b> · Recurso educativo sin conexión</p>
+    <a href="#inicio">Volver arriba ↑</a>
+  </footer>
+</body>
+</html>

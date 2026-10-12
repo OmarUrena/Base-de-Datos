@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Laboratorio interactivo para aprender normalización de bases de datos y las tres primeras formas normales.">
+  <title>Normaliza · Laboratorio de formas normales</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="Ir al inicio"><span class="brand-cube" aria-hidden="true">N</span><span>NORMALIZA</span></a>
+    <nav aria-label="Navegación principal">
+      <a class="nav-link active" href="#diagnostico">Diagnóstico</a>
+      <a class="nav-link" href="#taller">Taller</a>
+      <a class="nav-link" href="#reto">Reto</a>
+    </nav>
+    <div class="status"><i></i> MODO LABORATORIO</div>
+  </header>
+
+  <main id="contenido">
+    <section class="hero" id="inicio">
+      <div class="hero-copy">
+        <p class="kicker"><span>BASES DE DATOS</span> · NIVEL INTERMEDIO</p>
+        <h1>De datos<br><em>enredados</em><br>a datos claros.</h1>
+        <p class="hero-lead">Aprende a normalizar una base de datos: detecta redundancias, separa responsabilidades y construye tablas que no se rompen al crecer.</p>
+        <a class="primary-action" href="#diagnostico">Iniciar diagnóstico <span>→</span></a>
+        <div class="hero-meta"><span>◷ 15 min</span><span>4 experimentos</span><span>100% offline</span></div>
+      </div>
+
+      <div class="chaos-board" aria-label="Ejemplo de datos desordenados">
+        <div class="board-label">ANTES DE NORMALIZAR</div>
+        <div class="chaos-row row-a"><small>pedido_01</small><b>Ana, Mérida</b><span>Teclado × 1; Mouse × 2</span></div>
+        <div class="chaos-row row-b"><small>pedido_02</small><b>Leo, Caracas</b><span>Monitor × 1</span></div>
+        <div class="chaos-row row-c"><small>pedido_03</small><b>Ana, Mérida</b><span>Mouse × 1; Cable × 3</span></div>
+        <svg viewBox="0 0 460 360" aria-hidden="true">
+          <path d="M65 70 C210 20 220 240 403 182" />
+          <path d="M58 191 C180 260 298 74 414 292" />
+          <circle cx="65" cy="70" r="6"/><circle cx="403" cy="182" r="6"/>
+          <circle cx="58" cy="191" r="6"/><circle cx="414" cy="292" r="6"/>
+        </svg>
+        <div class="warning-tag tag-one">¡Ana se repite!</div>
+        <div class="warning-tag tag-two">Más de un valor</div>
+        <div class="noise-dot d1"></div><div class="noise-dot d2"></div><div class="noise-dot d3"></div>
+      </div>
+    </section>
+
+    <section class="diagnosis section-shell" id="diagnostico" data-section="diagnostico">
+      <div class="section-heading">
+        <p class="step-label">00 · EL PROBLEMA</p>
+        <h2>Una tabla puede funcionar…<br><em>hasta que deja de hacerlo.</em></h2>
+        <p>La redundancia no solo ocupa espacio. También produce anomalías: situaciones donde insertar, actualizar o borrar datos tiene efectos inesperados.</p>
+      </div>
+
+      <div class="anomaly-lab">
+        <div class="anomaly-tabs" role="tablist" aria-label="Tipos de anomalías">
+          <button class="anomaly-tab active" type="button" role="tab" aria-selected="true" data-anomaly="update"><span>01</span><b>Actualización</b><small>El mismo dato contradice otra fila</small></button>
+          <button class="anomaly-tab" type="button" role="tab" aria-selected="false" data-anomaly="insert"><span>02</span><b>Inserción</b><small>No puedes guardar un dato aislado</small></button>
+          <button class="anomaly-tab" type="button" role="tab" aria-selected="false" data-anomaly="delete"><span>03</span><b>Eliminación</b><small>Borras más información de la prevista</small></button>
+        </div>
+        <div class="anomaly-demo" id="anomalyDemo" aria-live="polite"></div>
+      </div>
+
+      <div class="definition-strip">
+        <span aria-hidden="true">✦</span>
+        <p><b>Normalizar</b> es organizar los datos en tablas relacionadas para reducir redundancias y proteger su consistencia.</p>
+      </div>
+    </section>
+
+    <section class="map-section">
+      <div class="section-shell">
+        <div class="section-heading compact">
+          <p class="step-label">EL MAPA</p>
+          <h2>Tres filtros, un diseño más sólido</h2>
+        </div>
+        <div class="normal-form-map">
+          <article>
+            <span class="form-number">1FN</span>
+            <div><p>PRIMERA FORMA NORMAL</p><h3>Un valor por celda</h3><small>Sin listas ni grupos repetidos.</small></div>
+            <i>01</i>
+          </article>
+          <div class="map-arrow">→</div>
+          <article>
+            <span class="form-number">2FN</span>
+            <div><p>SEGUNDA FORMA NORMAL</p><h3>Depende de toda la clave</h3><small>Sin dependencias parciales.</small></div>
+            <i>02</i>
+          </article>
+          <div class="map-arrow">→</div>
+          <article>
+            <span class="form-number">3FN</span>
+            <div><p>TERCERA FORMA NORMAL</p><h3>Solo de la clave</h3><small>Sin dependencias transitivas.</small></div>
+            <i>03</i>
+          </article>
+        </div>
+        <p class="mnemonic"><b>La frase clásica:</b> cada atributo depende de <u>la clave</u>, de <u>toda la clave</u> y de <u>nada más que la clave</u>.</p>
+      </div>
+    </section>
+
+    <section class="workshop" id="taller" data-section="taller">
+      <div class="section-shell">
+        <div class="section-heading workshop-heading">
+          <div><p class="step-label">01–03 · EL TALLER</p><h2>Normaliza paso a paso</h2></div>
+          <p>Seguiremos un único caso: los pedidos de una tienda. Cambia de etapa y observa qué problema se resuelve.</p>
+        </div>
+
+        <div class="workbench">
+          <div class="phase-tabs" role="tablist" aria-label="Etapas de normalización">
+            <button class="phase-tab active" type="button" role="tab" aria-selected="true" data-phase="0"><span>00</span>Sin normalizar</button>
+            <button class="phase-tab" type="button" role="tab" aria-selected="false" data-phase="1"><span>01</span>Primera FN</button>
+            <button class="phase-tab" type="button" role="tab" aria-selected="false" data-phase="2"><span>02</span>Segunda FN</button>
+            <button class="phase-tab" type="button" role="tab" aria-selected="false" data-phase="3"><span>03</span>Tercera FN</button>
+          </div>
+          <div class="phase-content" id="phaseContent" aria-live="polite"></div>
+          <div class="workbench-footer">
+            <div class="legend"><span><i class="pk-dot"></i> Clave primaria</span><span><i class="fk-dot"></i> Clave foránea</span><span><i class="problem-dot"></i> Problema detectado</span></div>
+            <div class="phase-controls"><button id="previousPhase" type="button">← Anterior</button><b id="phaseCounter">Etapa 0 de 3</b><button id="nextPhase" type="button">Siguiente →</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dependencies section-shell">
+      <div class="section-heading centered">
+        <p class="step-label">PIENSA EN FLECHAS</p>
+        <h2>¿De quién depende este dato?</h2>
+        <p>Una dependencia funcional significa que conocer un valor permite determinar otro.</p>
+      </div>
+      <div class="dependency-board">
+        <button class="attribute key" type="button" data-attribute="pedido"><span>PK</span> pedido_id</button>
+        <button class="attribute" type="button" data-attribute="fecha">fecha</button>
+        <button class="attribute" type="button" data-attribute="cliente">cliente_id</button>
+        <button class="attribute" type="button" data-attribute="nombre">cliente_nombre</button>
+        <button class="attribute" type="button" data-attribute="ciudad">cliente_ciudad</button>
+        <div class="dependency-explanation" id="dependencyExplanation"><span>Selecciona un atributo</span><p>Te mostraremos de qué dato depende y qué significa para la normalización.</p></div>
+      </div>
+    </section>
+
+    <section class="challenge-section" id="reto" data-section="reto">
+      <div class="section-shell">
+        <div class="section-heading centered light">
+          <p class="step-label">04 · RETO FINAL</p>
+          <h2>Detective de dependencias</h2>
+          <p>Analiza una base de datos escolar y decide cuál es el siguiente paso correcto.</p>
+        </div>
+        <div class="challenge-card">
+          <div class="challenge-top">
+            <div><span>CASO: INSCRIPCIONES</span><b id="questionCount">Pregunta 1 de 4</b></div>
+            <div class="challenge-progress"><i id="challengeProgress"></i></div>
+            <strong id="scoreLabel">0 puntos</strong>
+          </div>
+          <div class="challenge-body" id="challengeBody"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="summary">
+      <div class="section-shell summary-inner">
+        <div><p class="step-label">ANTES DE TERMINAR</p><h2>Tu lista de comprobación</h2></div>
+        <ol>
+          <li><span>1</span><p><b>¿Cada celda contiene un solo valor?</b>Si no, comienza por 1FN.</p></li>
+          <li><span>2</span><p><b>¿Cada atributo depende de la clave completa?</b>Si no, separa para alcanzar 2FN.</p></li>
+          <li><span>3</span><p><b>¿Algún atributo no clave determina a otro?</b>Si ocurre, sepáralos para alcanzar 3FN.</p></li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer><p><b>NORMALIZA</b> · Laboratorio de bases de datos</p><a href="#inicio">Volver al inicio ↑</a></footer>
+</body>
+</html>

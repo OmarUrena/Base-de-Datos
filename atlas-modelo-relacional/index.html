@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Atlas interactivo para aprender entidades, atributos, relaciones, cardinalidad y fundamentos del modelo relacional.">
+  <title>Atlas Relacional · Del mundo real a las tablas</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <header class="topbar">
+    <a class="brand" href="#inicio"><span aria-hidden="true">AR</span><b>ATLAS RELACIONAL</b></a>
+    <nav aria-label="Navegación principal">
+      <a class="nav-link active" href="#conceptos">Conceptos</a>
+      <a class="nav-link" href="#cardinalidad">Cardinalidad</a>
+      <a class="nav-link" href="#laboratorio">Laboratorio</a>
+    </nav>
+    <div class="route-status"><i></i> RUTA 01 · MODELO RELACIONAL</div>
+  </header>
+
+  <main id="contenido">
+    <section class="hero" id="inicio">
+      <div class="hero-copy">
+        <p class="eyebrow">CARTOGRAFÍA DE DATOS · NIVEL INICIAL</p>
+        <h1>Del mundo real<br>a un <em>mapa de datos.</em></h1>
+        <p class="hero-lead">Descubre cómo convertimos personas, objetos y acciones en entidades, atributos y relaciones que una base de datos puede entender.</p>
+        <a class="primary-button" href="#conceptos">Explorar el atlas <span>↓</span></a>
+        <p class="hero-meta">◷ 15 minutos · 5 estaciones · Sin conexión</p>
+      </div>
+
+      <div class="hero-map" aria-label="Diagrama entidad relación de una biblioteca">
+        <div class="map-grid"></div>
+        <div class="entity-node member-node"><small>ENTIDAD</small><b>SOCIO</b><span>▭ persona registrada</span></div>
+        <div class="entity-node loan-node"><small>ENTIDAD</small><b>PRÉSTAMO</b><span>▭ evento registrado</span></div>
+        <div class="entity-node book-node"><small>ENTIDAD</small><b>LIBRO</b><span>▭ objeto del catálogo</span></div>
+        <div class="relation-chip borrows">REALIZA</div>
+        <div class="relation-chip includes">INCLUYE</div>
+        <div class="map-line line-one"><i>1</i><span></span><b>N</b></div>
+        <div class="map-line line-two"><i>N</i><span></span><b>1</b></div>
+        <div class="attribute-orbit orbit-one">nombre</div>
+        <div class="attribute-orbit orbit-two">fecha</div>
+        <div class="attribute-orbit orbit-three">título</div>
+        <p class="map-note">Un pequeño universo<br>hecho de conceptos.</p>
+      </div>
+    </section>
+
+    <section class="concept-section section-shell" id="conceptos" data-section="conceptos">
+      <div class="section-heading centered">
+        <p class="section-label">01 · LAS PIEZAS DEL MAPA</p>
+        <h2>Cuatro ideas para representar la realidad</h2>
+        <p>Selecciona cada pieza para verla dentro del caso de una biblioteca.</p>
+      </div>
+
+      <div class="concept-explorer">
+        <div class="concept-tabs" role="tablist" aria-label="Conceptos fundamentales">
+          <button class="concept-tab active" type="button" role="tab" aria-selected="true" data-concept="entity"><span>01</span><b>Entidad</b><small>La cosa que nos importa</small></button>
+          <button class="concept-tab" type="button" role="tab" aria-selected="false" data-concept="attribute"><span>02</span><b>Atributo</b><small>Lo que sabemos de ella</small></button>
+          <button class="concept-tab" type="button" role="tab" aria-selected="false" data-concept="relationship"><span>03</span><b>Relación</b><small>Cómo se conecta</small></button>
+          <button class="concept-tab" type="button" role="tab" aria-selected="false" data-concept="cardinality"><span>04</span><b>Cardinalidad</b><small>Cuántas participan</small></button>
+        </div>
+        <div class="concept-stage" id="conceptStage" aria-live="polite"></div>
+      </div>
+
+      <div class="language-tip"><span>✦</span><p><b>Truco de lenguaje</b>Las entidades suelen ser sustantivos, los atributos describen y las relaciones suelen expresarse con verbos.</p></div>
+    </section>
+
+    <section class="anatomy-section">
+      <div class="section-shell">
+        <div class="section-heading anatomy-heading">
+          <div><p class="section-label">02 · MODELO RELACIONAL</p><h2>Cuando el mapa se convierte en tablas</h2></div>
+          <p>El modelo relacional organiza datos en relaciones —habitualmente llamadas tablas— compuestas por filas y columnas.</p>
+        </div>
+
+        <div class="table-anatomy">
+          <div class="anatomy-controls" role="group" aria-label="Partes de una tabla">
+            <button class="anatomy-button active" type="button" data-part="relation"><i></i><span><b>Relación</b>La tabla completa</span></button>
+            <button class="anatomy-button" type="button" data-part="attribute"><i></i><span><b>Atributo</b>Una columna</span></button>
+            <button class="anatomy-button" type="button" data-part="tuple"><i></i><span><b>Tupla</b>Una fila</span></button>
+            <button class="anatomy-button" type="button" data-part="domain"><i></i><span><b>Dominio</b>Valores permitidos</span></button>
+          </div>
+
+          <div class="anatomy-visual">
+            <div class="table-title"><span>RELACIÓN</span> LIBROS <small>4 tuplas · 4 atributos</small></div>
+            <div class="rel-table highlight-relation" id="relTable" role="table" aria-label="Tabla Libros">
+              <div class="rel-row rel-head" role="row"><span data-column="id">libro_id <b>PK</b></span><span data-column="title">título</span><span data-column="year">año</span><span data-column="status">estado</span></div>
+              <div class="rel-row" role="row"><span>L-001</span><span>Pedro Páramo</span><span>1955</span><span>Disponible</span></div>
+              <div class="rel-row" role="row"><span>L-002</span><span>La tregua</span><span>1960</span><span>Prestado</span></div>
+              <div class="rel-row" role="row"><span>L-003</span><span>Doña Bárbara</span><span>1929</span><span>Disponible</span></div>
+              <div class="rel-row" role="row"><span>L-004</span><span>El Aleph</span><span>1949</span><span>Reserva</span></div>
+            </div>
+            <div class="anatomy-caption" id="anatomyCaption" aria-live="polite"><b>Relación:</b> el conjunto completo de datos sobre libros. En una implementación SQL se representa como una tabla.</div>
+          </div>
+        </div>
+
+        <div class="integrity-grid">
+          <article><span>◆</span><div><p>IDENTIDAD</p><h3>Clave primaria</h3><small>Identifica cada tupla sin repetir valores.</small></div></article>
+          <article><span>↗</span><div><p>REFERENCIA</p><h3>Clave foránea</h3><small>Conecta una tabla con otra.</small></div></article>
+          <article><span>✓</span><div><p>REGLAS</p><h3>Integridad</h3><small>Protege dominios, identidades y referencias.</small></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cardinality-section" id="cardinalidad" data-section="cardinalidad">
+      <div class="section-shell">
+        <div class="section-heading centered light">
+          <p class="section-label">03 · CUÁNTOS CON CUÁNTOS</p>
+          <h2>La cardinalidad pone las reglas</h2>
+          <p>Elige un tipo de relación y observa cómo cambia el diagrama y su traducción al modelo relacional.</p>
+        </div>
+
+        <div class="cardinality-lab">
+          <div class="cardinality-tabs" role="tablist" aria-label="Tipos de cardinalidad">
+            <button class="cardinality-tab" type="button" data-cardinality="one"><b>1 : 1</b><span>Uno a uno</span></button>
+            <button class="cardinality-tab active" type="button" data-cardinality="many"><b>1 : N</b><span>Uno a muchos</span></button>
+            <button class="cardinality-tab" type="button" data-cardinality="bridge"><b>N : M</b><span>Muchos a muchos</span></button>
+          </div>
+          <div class="cardinality-stage" id="cardinalityStage" aria-live="polite"></div>
+        </div>
+
+        <div class="optionality-note">
+          <div><span>0</span><i></i><b>Participación opcional</b><p>Puede no existir ninguna ocurrencia relacionada.</p></div>
+          <div><span>1</span><i></i><b>Participación obligatoria</b><p>Debe existir al menos una ocurrencia relacionada.</p></div>
+          <p><strong>Cardinalidad máxima</strong> dice cuántos pueden relacionarse. <strong>Opcionalidad o cardinalidad mínima</strong> dice si la relación puede faltar.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="translation-section section-shell">
+      <div class="section-heading">
+        <p class="section-label">04 · DEL DIAGRAMA AL ESQUEMA</p>
+        <h2>Tres reglas de traducción</h2>
+      </div>
+      <div class="translation-grid">
+        <article>
+          <span class="rule-no">A</span><h3>Entidad → tabla</h3><p>La entidad <b>Libro</b> se convierte en la tabla <code>LIBROS</code>. Sus atributos se convierten en columnas.</p>
+          <div class="rule-visual"><i>LIBRO</i><b>→</b><span>LIBROS<br><small>libro_id · título · año</small></span></div>
+        </article>
+        <article>
+          <span class="rule-no">B</span><h3>1:N → clave foránea</h3><p>La clave del lado “uno” viaja hacia la tabla del lado “muchos”.</p>
+          <div class="rule-visual"><i>SOCIO 1</i><b>→</b><span>N PRÉSTAMOS<br><small>socio_id [FK]</small></span></div>
+        </article>
+        <article>
+          <span class="rule-no">C</span><h3>N:M → tabla puente</h3><p>La relación se convierte en una tabla con las claves de ambas entidades.</p>
+          <div class="rule-visual bridge-rule"><i>AUTORES</i><b>→</b><span>AUTOR_LIBRO</span><b>←</b><i>LIBROS</i></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="lab-section" id="laboratorio" data-section="laboratorio">
+      <div class="section-shell">
+        <div class="section-heading lab-heading">
+          <div><p class="section-label">05 · LABORATORIO FINAL</p><h2>Modela una clínica veterinaria</h2></div>
+          <p>Lee el caso y toma cinco decisiones. El esquema aparecerá a medida que avances.</p>
+        </div>
+
+        <div class="case-brief"><span>CASO</span><p>La clínica registra <mark>mascotas</mark> y <mark>veterinarios</mark>. Cada mascota tiene nombre y especie. Un veterinario puede atender muchas consultas; cada consulta corresponde a una mascota y un veterinario, y guarda fecha y diagnóstico.</p></div>
+
+        <div class="model-builder">
+          <div class="builder-progress">
+            <p><span>PASO</span><b id="builderStep">1 de 5</b></p>
+            <div><i id="builderProgress"></i></div>
+            <strong id="builderScore">0 / 5</strong>
+          </div>
+          <div class="builder-body">
+            <div class="builder-question" id="builderQuestion"></div>
+            <div class="schema-preview">
+              <div class="preview-head"><span>ESQUEMA EN CONSTRUCCIÓN</span><i id="previewStatus">0 elementos</i></div>
+              <div class="preview-canvas" id="previewCanvas"><p>Responde para construir el modelo.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="recap-section">
+      <div class="section-shell recap-inner">
+        <div><p class="section-label">COORDENADAS FINALES</p><h2>Lee el mundo.<br>Diseña el mapa.</h2></div>
+        <ol>
+          <li><span>01</span><p><b>Encuentra sustantivos</b>Candidatos a entidades.</p></li>
+          <li><span>02</span><p><b>Pregunta qué sabes</b>Descubre sus atributos.</p></li>
+          <li><span>03</span><p><b>Conecta con verbos</b>Define las relaciones.</p></li>
+          <li><span>04</span><p><b>Pregunta cuántos</b>Establece cardinalidad y opcionalidad.</p></li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer><p><b>ATLAS RELACIONAL</b> · Recurso educativo sin conexión</p><a href="#inicio">Volver al mapa ↑</a></footer>
+</body>
+</html>
